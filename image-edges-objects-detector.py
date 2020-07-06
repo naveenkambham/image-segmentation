@@ -3,6 +3,8 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 from scipy import ndimage
+from sklearn.cluster import KMeans
+
 def overview_image(file):
     # to get a glance of the image
 
@@ -61,12 +63,24 @@ def detect_edges(img):
 
     plt.imshow(out_img_edges,cmap='gray')
     plt.show()
-    
+
+def segment_by_clustering(img_file):
+    # detecting the objects based on similar pixel values
+    img = plt.imread(img_file)/255 
+    img_reshaped = img.reshape(img.shape[0]*img.shape[1],3)
+    kmeans = KMeans(n_clusters=5, random_state=0).fit(img_reshaped)
+    out_img = kmeans.cluster_centers_[kmeans.labels_]
+    labeled_img = out_img.reshape(img.shape[0], img.shape[1], img.shape[2])
+    plt.imshow(labeled_img)
+    plt.show()
 
 # Use Case 1: Identifying different objects inside an image
-# img = overview_image(r'C:\codebase\image-segmentation\mining.jpg')
-# apply_img_threshold(img)
+img = overview_image(r'C:\codebase\image-segmentation\mining.jpg')
+apply_img_threshold(img)
 
 # Use Case 2: Detecting the edges
 img = overview_image(r'C:\codebase\image-segmentation\saskatoon.png')
 detect_edges(img)
+
+# Use Case 3: Image Segmentation by Cluster Analysis
+segment_by_clustering(r'C:\codebase\image-segmentation\mining.jpg')
