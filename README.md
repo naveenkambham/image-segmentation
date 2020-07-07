@@ -3,6 +3,7 @@ Image segmentation is the process of partitioning a digital image into multiple 
 
 ## Edge Detection
 Edge detection is useful in identifying the boundaries of objects within images. It works by detecting discontinuities in brightness. Various weight matrices such as Sobel and Laplace can be very useful in identifying the edges of objects.
+
 ![alt text](https://github.com/naveenkambham/image-segmentation/blob/master/saskatoon.png)
 ![alt text](https://github.com/naveenkambham/image-segmentation/blob/master/saskatoon_laplace_edges_detection.png)
 
